@@ -17,12 +17,11 @@ pipeline {
         stage("Install dependencies"){
             steps{
                 sh '''
-                  sudo su
-                  yum install python -y
-                  yum install pip -y
-                  yum install docker -y
-                  systemctl enable docker
-                  systemctl start docker
+                  sudo yum install python -y
+                  sudo yum install pip -y
+                  sudo yum install docker -y
+                  sudo systemctl enable docker
+                  sudo systemctl start docker
                   '''
             }
         }
@@ -30,8 +29,8 @@ pipeline {
             steps{
                 sh '''
                 cd my_floder/
-                docker build -t flask-app .
-                docker run -d -p 3000:3000 flask-app
+                sudo docker build -t flask-app .
+                sudo docker run -d -p 3000:3000 flask-app
                 '''
             }
         }
