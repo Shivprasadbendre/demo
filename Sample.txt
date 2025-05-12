@@ -8,3 +8,6 @@ sudo dnf update -y
                 sudo dnf install -y --nogpgcheck jenkins
                 sudo systemctl enable jenkins
                 sudo systemctl start jenkins
+
+sudo visudo
+jenkins ALL=(ALL) NOPASSWD:ALL
