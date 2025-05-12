@@ -1,1 +1,10 @@
 hello
+sudo dnf update -y
+                sudo dnf install -y java-17-amazon-corretto wget git
+                sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+                sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+                sudo dnf clean all
+                sudo dnf makecache
+                sudo dnf install -y --nogpgcheck jenkins
+                sudo systemctl enable jenkins
+                sudo systemctl start jenkins
