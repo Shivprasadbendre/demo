@@ -25,13 +25,27 @@ pipeline {
                   '''
             }
         }
+        stage("stoping the running containers"){
+            steps{
+                script{
+                    def running=
+                    sh(script: "sudo docker ps -q -f name=flask",returnStdout:true).trim()
+                    if (running){
+                        sh "sudo docker stop flask"
+                        sh "sudo docker rm flask"
+                        sh "sudo docker image prune -f"
+                    }
+                }
+            }
+        }
         stage("run the app"){
             steps{
+                dir("${CLONE_DIR}"){
                 sh '''
-                cd my_floder/
                 sudo docker build -t flask-app .
-                sudo docker run -d -p 3000:3000 flask-app
+                sudo docker run -d --name=flask -p 3000:3000 flask-app
                 '''
+                }
             }
         }
     }
